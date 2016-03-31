@@ -1,4 +1,4 @@
-package app.com.example.alumno.elclima;
+package app.com.example.alumno.elclima.View;
 
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
@@ -24,14 +24,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import app.com.example.alumno.elclima.R;
+import app.com.example.alumno.elclima.ViewModel.ClimaViewModel;
+
 /**
  * Created by Alumno on 01/03/2016.
  */
-public class DatosFragment extends Fragment {
+public class ClimaView extends Fragment implements ClimaViewModel{
 
     private ArrayAdapter<String> datosAdapter;
 
-    public DatosFragment(){
+    public ClimaView(){
     }
 
     public void onCreated(Bundle savedInstanceState){
@@ -49,7 +52,7 @@ public class DatosFragment extends Fragment {
 
 
         List<String> semana = new ArrayList<String>(Arrays.asList(datosprueba));
-        datosAdapter = new ArrayAdapter<String>(getActivity(),R.layout.datoslayout, R.id.textView_datos, semana);
+        datosAdapter = new ArrayAdapter<String>(getActivity(), R.layout.datoslayout, R.id.textView_datos, semana);
         View rootView = inflater.inflate(R.layout.content_main, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.listView_datos);
         listView.setAdapter(datosAdapter);

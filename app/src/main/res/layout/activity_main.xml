@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/container"
-    tools:context="app.com.example.alumno.elclima.MainActivity">
+    tools:context=".Controller.ClimaActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

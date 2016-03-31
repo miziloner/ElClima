@@ -1,4 +1,4 @@
-package app.com.example.alumno.elclima;
+package app.com.example.alumno.elclima.Controller;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +9,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import app.com.example.alumno.elclima.View.ClimaView;
+import app.com.example.alumno.elclima.R;
+import app.com.example.alumno.elclima.ViewModel.ClimaViewModelListener;
+
+public class ClimaActivity extends AppCompatActivity implements ClimaViewModelListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new DatosFragment()).commit();
+                    .add(R.id.container, new ClimaView()).commit();
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,5 +56,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getWeatherFromService(){
+
     }
 }
