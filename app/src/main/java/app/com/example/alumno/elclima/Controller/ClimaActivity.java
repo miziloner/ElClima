@@ -11,9 +11,9 @@ import android.view.MenuItem;
 
 import app.com.example.alumno.elclima.View.ClimaView;
 import app.com.example.alumno.elclima.R;
-import app.com.example.alumno.elclima.ViewModel.ClimaViewModelListener;
+import app.com.example.alumno.elclima.ViewModel.IClimaViewModelListener;
 
-public class ClimaActivity extends AppCompatActivity implements ClimaViewModelListener{
+public class ClimaActivity extends AppCompatActivity implements IClimaViewModelListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

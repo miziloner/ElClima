@@ -22,15 +22,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import app.com.example.alumno.elclima.R;
-import app.com.example.alumno.elclima.ViewModel.ClimaViewModel;
+import app.com.example.alumno.elclima.ViewModel.IClimaViewModel;
 
 /**
  * Created by Alumno on 01/03/2016.
  */
-public class ClimaView extends Fragment implements ClimaViewModel{
+public class ClimaView extends Fragment implements IClimaViewModel {
 
     private ArrayAdapter<String> datosAdapter;
 
