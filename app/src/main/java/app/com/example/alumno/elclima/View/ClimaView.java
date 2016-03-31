@@ -25,6 +25,7 @@ import java.util.List;
 
 import app.com.example.alumno.elclima.R;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModel;
+import app.com.example.alumno.elclima.ViewModel.IClimaViewModelListener;
 
 /**
  * Created by Alumno on 01/03/2016.
@@ -52,10 +53,17 @@ public class ClimaView extends Fragment implements IClimaViewModel {
 
         List<String> semana = new ArrayList<String>(Arrays.asList(datosprueba));
         datosAdapter = new ArrayAdapter<String>(getActivity(), R.layout.datoslayout, R.id.textView_datos, semana);
-        View rootView = inflater.inflate(R.layout.content_main, container, false);
+        View rootView = inflater.inflate(R.layout.clima_fragment, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.listView_datos);
         listView.setAdapter(datosAdapter);
         return rootView;
+    }
+
+
+
+    @Override
+    public void setListener(IClimaViewModelListener listener) {
+
     }
 
     public class Tarea extends AsyncTask < Void, Void, String  >{
