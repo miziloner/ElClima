@@ -1,6 +1,7 @@
 package app.com.example.alumno.elclima.View;
 
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import app.com.example.alumno.elclima.Model.Clima;
 import app.com.example.alumno.elclima.R;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModel;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModelListener;
@@ -34,14 +36,27 @@ public class ClimaView extends Fragment implements IClimaViewModel {
 
     private ArrayAdapter<String> datosAdapter;
 
-    public ClimaView(){
+    IClimaViewModelListener mListener;
+    private View rootView;
+    private ListView listView;
+
+    public ClimaView() {
     }
 
-    public void onCreated(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-    }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstantState){
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.clima_fragment, container, false);
+
+        listView = (ListView) rootView.findViewById(R.id.listView_datos);
+
+        /** Un list View muestra datos a traves de un Adapter ***/
+
+        datosAdapter = new ArrayAdapter<String>(getActivity(), R.layout.datoslayout, R.id.textView_datos, semana);
+
+
+
         String[] datosprueba = {
                 "Hoy - Lluvioso 29/10",
                 "Mañana - Nublado 20/10",
@@ -50,23 +65,39 @@ public class ClimaView extends Fragment implements IClimaViewModel {
                 "Viernes - Nublado 12/6"
         };
 
-
         List<String> semana = new ArrayList<String>(Arrays.asList(datosprueba));
-        datosAdapter = new ArrayAdapter<String>(getActivity(), R.layout.datoslayout, R.id.textView_datos, semana);
-        View rootView = inflater.inflate(R.layout.clima_fragment, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.listView_datos);
         listView.setAdapter(datosAdapter);
+
+
+
+
+
+
+
         return rootView;
+
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        mListener.getWeatherFromService();
+
+    }
 
     @Override
     public void setListener(IClimaViewModelListener listener) {
-
+        mListener = listener;
     }
 
-    public class Tarea extends AsyncTask < Void, Void, String  >{
+    @Override
+    public void paintClimasOnListView(ArrayList<Clima> losClimasDelWB) {
+        //TODO
+        //TODO crear instancia del adapter
+    }
+
+    public class Tarea extends AsyncTask<Void, Void, String> {
 
 
         @Override
@@ -102,7 +133,6 @@ public class ClimaView extends Fragment implements IClimaViewModel {
             return null;
         }
     }
-
 
 
 }

@@ -5,7 +5,7 @@
 
     <fragment
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:name="app.com.example.alumno.elclima.View.ClimaView"
         android:id="@+id/clima_fragment" />
 </LinearLayout>
