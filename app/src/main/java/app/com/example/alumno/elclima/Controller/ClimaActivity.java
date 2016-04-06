@@ -20,6 +20,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import app.com.example.alumno.elclima.Model.Clima;
 import app.com.example.alumno.elclima.Model.Constants;
 import app.com.example.alumno.elclima.View.ClimaView;
@@ -51,13 +53,18 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+                new ç.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         Log.i("COMO NJIOOO PAPAPAAAAAa", "LLegue a weather from service" + response);
                         try {
                             JSONObject jsonob = new JSONObject(response);
+
+                            ArrayList < String > list =  new ArrayList< String >();
+                            for  ( int i = 0 ; i < jsonob . length (); i ++)  {
+                                queue.add();
+                            }
 
 
 
