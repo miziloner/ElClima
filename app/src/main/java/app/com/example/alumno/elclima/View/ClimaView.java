@@ -48,32 +48,7 @@ public class ClimaView extends Fragment implements IClimaViewModel {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.clima_fragment, container, false);
-
         listView = (ListView) rootView.findViewById(R.id.listView_datos);
-
-        /** Un list View muestra datos a traves de un Adapter ***/
-
-        datosAdapter = new ArrayAdapter<String>(getActivity(), R.layout.datoslayout, R.id.textView_datos, semana);
-
-
-
-        String[] datosprueba = {
-                "Hoy - Lluvioso 29/10",
-                "Mañana - Nublado 20/10",
-                "Miercoles - Soleado 28/14",
-                "Jueves- Soleado 29/10",
-                "Viernes - Nublado 12/6"
-        };
-
-        List<String> semana = new ArrayList<String>(Arrays.asList(datosprueba));
-        listView.setAdapter(datosAdapter);
-
-
-
-
-
-
-
         return rootView;
 
     }
@@ -81,9 +56,7 @@ public class ClimaView extends Fragment implements IClimaViewModel {
     @Override
     public void onResume() {
         super.onResume();
-
         mListener.getWeatherFromService();
-
     }
 
     @Override
@@ -92,9 +65,33 @@ public class ClimaView extends Fragment implements IClimaViewModel {
     }
 
     @Override
-    public void paintClimasOnListView(ArrayList<Clima> losClimasDelWB) {
+    public void pintaClimasEnListView(ArrayList<Clima> losClimasDelWB) {
         //TODO
         //TODO crear instancia del adapter
+        Log.i("", "" + losClimasDelWB.size());
+
+        ArrayList<String> minimasArrayList = new ArrayList<String>();
+
+        for(int i = 0 ; i <losClimasDelWB.size();i++){
+            Log.i("ClimaView","elemento: "+i);
+            Log.i("ClimaView","fecha: "+losClimasDelWB.get(i).fecha);
+            Log.i("ClimaView","minima: "+losClimasDelWB.get(i).minima);
+            Log.i("ClimaView", "maxima: " + losClimasDelWB.get(i).maxima);
+
+            minimasArrayList.add(losClimasDelWB.get(i).fecha);
+            minimasArrayList.add(losClimasDelWB.get(i).minima);
+            minimasArrayList.add(losClimasDelWB.get(i).maxima);
+
+        }
+
+
+
+
+
+       datosAdapter = new ArrayAdapter<String>(getActivity(), R.layout.datoslayout, R.id.textView_datos, minimasArrayList);
+        listView.setAdapter(datosAdapter);
+
+
     }
 
     public class Tarea extends AsyncTask<Void, Void, String> {

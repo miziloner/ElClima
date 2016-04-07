@@ -5,10 +5,10 @@ package app.com.example.alumno.elclima.Model;
  */
 public class Clima {
 
-    public String Fecha;
+    public String fecha;
     public String Ciudad;
-    public String Minima;
-    public String Maxima;
+    public String minima;
+    public String maxima;
     public String Humedad;
     public String icono;
 

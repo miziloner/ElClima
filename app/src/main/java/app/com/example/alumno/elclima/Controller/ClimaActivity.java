@@ -1,14 +1,8 @@
 package app.com.example.alumno.elclima.Controller;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +19,6 @@ import java.util.ArrayList;
 
 import app.com.example.alumno.elclima.Model.Clima;
 import app.com.example.alumno.elclima.Model.Constants;
-import app.com.example.alumno.elclima.View.ClimaView;
 import app.com.example.alumno.elclima.R;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModel;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModelListener;
@@ -41,59 +35,46 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
 
         viewModel = (IClimaViewModel) getSupportFragmentManager().findFragmentById(R.id.clima_fragment);
         viewModel.setListener(this);
+
     }
 
 
     @Override
     public void getWeatherFromService() {
 
-// Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Constants.URL_SERVICE;
-
-// Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new ç.Listener<String>() {
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+                        ArrayList<Clima> losClimas= new ArrayList<Clima>();
                         // Display the first 500 characters of the response string.
                         Log.i("COMO NJIOOO PAPAPAAAAAa", "LLegue a weather from service" + response);
                         try {
                             JSONObject jsonob = new JSONObject(response);
 
-                            ArrayList < String > list =  new ArrayList< String >();
-                            for  ( int i = 0 ; i < jsonob . length (); i ++)  {
-                                queue.add();
+                            JSONArray listArray = jsonob.getJSONArray("list");
+                            for(int i = 0 ; i < listArray.length() ; i++){
+
+                                JSONObject itemJSON = listArray.getJSONObject(i);
+                                String fecha =  itemJSON.getString("dt_txt");
+                                JSONObject mainJSON = itemJSON.getJSONObject("main");
+                                double temp = mainJSON.getDouble("temp");
+                                double tempMin = mainJSON.getDouble("temp_min");
+                                double tempMax = mainJSON.getDouble("temp_max");
+
+                                Clima nuevoClima = new Clima();
+                                nuevoClima.fecha = fecha;
+                                nuevoClima.maxima = ""+tempMax;
+                                nuevoClima.minima = ""+tempMin;
+                                losClimas.add(nuevoClima);
                             }
-
-
-
-                            //investigar como parsear este json a un ArrayList<Clima>
-
-
-
-                            Clima nuevoClima = new Clima();
-//                            nuevoClima.Ciudad= //lo que traiga de tal hijo de tal campo del json
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            viewModel.pintaClimasEnListView(losClimas);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -101,9 +82,11 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
                 Log.i("onErrorResponse", "EL ERROR ES :" + error);
             }
         });
-// Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
+
+
 }
 
 

@@ -11,7 +11,7 @@ public interface IClimaViewModel {
 
     void setListener(IClimaViewModelListener listener);
 
-    void paintClimasOnListView(ArrayList<Clima> losClimasDelWB);
+    void pintaClimasEnListView(ArrayList<Clima> losClimasDelWB);
 
 
 }
