@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,11 +27,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import app.com.example.alumno.elclima.Model.Clima;
+import app.com.example.alumno.elclima.Model.Constants;
 import app.com.example.alumno.elclima.R;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModel;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModelListener;
@@ -37,15 +44,11 @@ import app.com.example.alumno.elclima.ViewModel.IClimaViewModelListener;
  * Created by Alumno on 01/03/2016.
  */
 public class ClimaView extends Fragment implements IClimaViewModel {
-
-    private ArrayAdapter<String> datosAdapter;
-
     IClimaViewModelListener mListener;
+
+
     private View rootView;
     private ListView listView;
-
-    public ClimaView() {
-    }
 
 
     @Nullable
@@ -70,74 +73,56 @@ public class ClimaView extends Fragment implements IClimaViewModel {
 
     @Override
     public void pintaClimasEnListView(ArrayList<Clima> losClimasDelWB) {
-        //TODO
-        //TODO crear instancia del adapter
         Log.i("", "" + losClimasDelWB.size());
 
-        ArrayList<String> minimasArrayList = new ArrayList<String>();
+        //TODO crear instancia del adapter
 
-        for(int i = 0 ; i <losClimasDelWB.size();i++){
-            Log.i("ClimaView","elemento: "+i);
-            Log.i("ClimaView","fecha: "+losClimasDelWB.get(i).fecha);
-            Log.i("ClimaView","minima: "+losClimasDelWB.get(i).minima);
-            Log.i("ClimaView", "maxima: " + losClimasDelWB.get(i).maxima);
+        String miPrimerNombre = new String("Carlos  ");
+        String miSegundoNombre = new String(" MAuricio ");
 
-            minimasArrayList.add(losClimasDelWB.get(i).fecha);
-            minimasArrayList.add(losClimasDelWB.get(i).minima);
-            minimasArrayList.add(losClimasDelWB.get(i).maxima);
-        }
+        ClimaAdapter adapter = new ClimaAdapter(getActivity().getApplicationContext(),R.layout.clima_listview_item,losClimasDelWB);
 
-       datosAdapter = new ArrayAdapter<String>(getActivity(), R.layout.datoslayout, R.id.textView_datos, minimasArrayList);
-        listView.setAdapter(datosAdapter);
+        //TODO falta setear el nuevo adapter al listview
 
-
+        listView.setAdapter(adapter);
     }
-//    public class Tarea extends AsyncTask<Void, Void, String> {
-//
-//
-//        @Override
-//        protected String doInBackground(Void... params) {
-//
-//            URL url = null;
-//            try {
-//                url = new URL("http://http://api.openweathermap.org/data/2.5/forecast?q=55540.mx&APPID=cf5a120f6eee20a98126442383c86613&units=metric");
-//                HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
-//                conexion.setRequestMethod("GET");
-//                conexion.connect();
-//                BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
-//
-//                //se crea la entra del objeto JSON
-//                StringBuffer buffer = new StringBuffer();
-//                String linea;
-//                while ((linea = entrada.readLine()) != null) {
-//                    buffer.append(linea + "\n");
-//                }
-//                String variableJson = buffer.toString();
-//                Log.i("datos", variableJson);
-//                JSONObject jsonob = new JSONObject(variableJson);
-//                return variableJson;
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//
-//            }
-//            return null;
-//        }
-//    }
+
+    /*public String ponFecha(String fechaFea){
+
+        Date today;
+        String result;
+        SimpleDateFormat formatter;
+
+        formatter = new SimpleDateFormat("EEE d MMM yy", Locale.ENGLISH);
+        today = new Date(fechaFea);
+        result = formatter.format(today);
+
+        return  result;
+
+    }*/
+
     public class ClimaAdapter extends ArrayAdapter<Clima> {
 
         int layoutResourceId;
         ArrayList<Clima> losClimas;
+        Context context;
 
-        public ClimaAdapter(Context context, int resource, ArrayList<Clima> losClimas) {
-            super(context, resource);
+        public ClimaAdapter(Context ctx, int resource, ArrayList<Clima> losCli) {
+
+            super(ctx, resource);
+            this.losClimas=losCli;
+            this.context = ctx;
+            this.layoutResourceId = resource;
+
         }
 
-        @Override
+
+    public Clima getItem(int index) {
+        return this.losClimas.get(index);
+    }
+
+
+    @Override
         public int getCount() {
             return losClimas.size();
         }
@@ -145,20 +130,36 @@ public class ClimaView extends Fragment implements IClimaViewModel {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View row = convertView;
-            Clima elclima = getItem(position);
-
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(layoutResourceId, parent, false);
+            if (row == null) {
+                // ROW INFLATION
+                Log.d("adapter", "Starting XML Row Inflation ... ");
+                LayoutInflater inflater = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                row = inflater.inflate(R.layout.clima_listview_item, parent, false);
+                Log.d("adapyer", "Successfully completed XML Row Inflation!");
             }
 
-            TextView tvfecha = (TextView) convertView.findViewById(R.id.tvfecha);
-            TextView tvhora = (TextView) convertView.findViewById(R.id.tvhora);
-            TextView tvminima = (TextView) convertView.findViewById(R.id.tvminima);
-            TextView tvmaxima = (TextView) convertView.findViewById(R.id.tvmaxima);
+            // Get item
+            Clima elclima = getItem(position);
+
+
+            TextView tvfecha = (TextView) row.findViewById(R.id.tvfecha);
+            TextView tvhora = (TextView) row.findViewById(R.id.tvhora);
+            TextView tvminima = (TextView) row.findViewById(R.id.tvminima);
+            TextView tvmaxima = (TextView) row.findViewById(R.id.tvmaxima);
+            ImageView iv=(ImageView)row.findViewById(R.id.imageView);
+
 
             tvfecha.setText(elclima.fecha);
             tvminima.setText(elclima.minima);
             tvmaxima.setText(elclima.maxima);
+
+            String urlIcono = Constants.URL_ICON+ elclima.icono;
+
+            Picasso.with(context).load(urlIcono).into(iv);
+
+            //Log.d("adapyer", "fecha:" +ponFecha(elclima.fecha) );
+
             return row;
 
         }

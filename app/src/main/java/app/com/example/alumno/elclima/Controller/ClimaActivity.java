@@ -65,10 +65,19 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
                                 double tempMin = mainJSON.getDouble("temp_min");
                                 double tempMax = mainJSON.getDouble("temp_max");
 
+                                JSONArray weatherJSONArray = itemJSON.getJSONArray("weather");
+                                JSONObject weatherJSON = (JSONObject) weatherJSONArray.get(0);
+                                String icon =  weatherJSON.getString("icon");
+
+
+
                                 Clima nuevoClima = new Clima();
                                 nuevoClima.fecha = fecha;
                                 nuevoClima.maxima = ""+tempMax;
                                 nuevoClima.minima = ""+tempMin;
+                                nuevoClima.icono = ""+icon+".png";
+
+
                                 losClimas.add(nuevoClima);
                             }
                             viewModel.pintaClimasEnListView(losClimas);
