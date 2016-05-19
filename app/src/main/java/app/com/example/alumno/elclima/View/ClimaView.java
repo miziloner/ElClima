@@ -1,15 +1,19 @@
 package app.com.example.alumno.elclima.View;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,53 +85,82 @@ public class ClimaView extends Fragment implements IClimaViewModel {
             minimasArrayList.add(losClimasDelWB.get(i).fecha);
             minimasArrayList.add(losClimasDelWB.get(i).minima);
             minimasArrayList.add(losClimasDelWB.get(i).maxima);
-
         }
-
-
-
-
 
        datosAdapter = new ArrayAdapter<String>(getActivity(), R.layout.datoslayout, R.id.textView_datos, minimasArrayList);
         listView.setAdapter(datosAdapter);
 
 
     }
+//    public class Tarea extends AsyncTask<Void, Void, String> {
+//
+//
+//        @Override
+//        protected String doInBackground(Void... params) {
+//
+//            URL url = null;
+//            try {
+//                url = new URL("http://http://api.openweathermap.org/data/2.5/forecast?q=55540.mx&APPID=cf5a120f6eee20a98126442383c86613&units=metric");
+//                HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+//                conexion.setRequestMethod("GET");
+//                conexion.connect();
+//                BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
+//
+//                //se crea la entra del objeto JSON
+//                StringBuffer buffer = new StringBuffer();
+//                String linea;
+//                while ((linea = entrada.readLine()) != null) {
+//                    buffer.append(linea + "\n");
+//                }
+//                String variableJson = buffer.toString();
+//                Log.i("datos", variableJson);
+//                JSONObject jsonob = new JSONObject(variableJson);
+//                return variableJson;
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//            }
+//            return null;
+//        }
+//    }
+    public class ClimaAdapter extends ArrayAdapter<Clima> {
 
-    public class Tarea extends AsyncTask<Void, Void, String> {
+        int layoutResourceId;
+        ArrayList<Clima> losClimas;
 
+        public ClimaAdapter(Context context, int resource, ArrayList<Clima> losClimas) {
+            super(context, resource);
+        }
 
         @Override
-        protected String doInBackground(Void... params) {
+        public int getCount() {
+            return losClimas.size();
+        }
 
-            URL url = null;
-            try {
-                url = new URL("http://http://api.openweathermap.org/data/2.5/forecast?q=55540.mx&APPID=cf5a120f6eee20a98126442383c86613&units=metric");
-                HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
-                conexion.setRequestMethod("GET");
-                conexion.connect();
-                BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+            Clima elclima = getItem(position);
 
-                //se crea la entra del objeto JSON
-                StringBuffer buffer = new StringBuffer();
-                String linea;
-                while ((linea = entrada.readLine()) != null) {
-                    buffer.append(linea + "\n");
-                }
-                String variableJson = buffer.toString();
-                Log.i("datos", variableJson);
-                JSONObject jsonob = new JSONObject(variableJson);
-                return variableJson;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(layoutResourceId, parent, false);
             }
-            return null;
+
+            TextView tvfecha = (TextView) convertView.findViewById(R.id.tvfecha);
+            TextView tvhora = (TextView) convertView.findViewById(R.id.tvhora);
+            TextView tvminima = (TextView) convertView.findViewById(R.id.tvminima);
+            TextView tvmaxima = (TextView) convertView.findViewById(R.id.tvmaxima);
+
+            tvfecha.setText(elclima.fecha);
+            tvminima.setText(elclima.minima);
+            tvmaxima.setText(elclima.maxima);
+            return row;
+
         }
     }
 
