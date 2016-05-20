@@ -7,16 +7,19 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+
         android:orientation="horizontal">
 
 
         <ImageView
             android:src="@drawable/sol"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:background="@color/amarillo"
             android:id="@+id/imageView" />
 
 
@@ -24,6 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/amarillo"
             android:orientation="vertical">
 
             <TextView
@@ -32,21 +36,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="fecha"
                 android:id="@+id/tvfecha"
-                android:textColor="@color/amarillo"
-                android:background="@color/negro"
+                android:textColor="@color/negro"
 
-                android:layout_marginLeft="10dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="hora"
-                android:id="@+id/tvhora"
-                android:textColor="#3e711b"
+                android:layout_marginLeft="10dp" />
 
-                android:layout_marginLeft="10dp"
-                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,6 +61,8 @@
 
                 android:layout_marginLeft="10dp"
                 />
+
+
         </LinearLayout>
 
 

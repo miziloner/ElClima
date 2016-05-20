@@ -144,15 +144,15 @@ public class ClimaView extends Fragment implements IClimaViewModel {
 
 
             TextView tvfecha = (TextView) row.findViewById(R.id.tvfecha);
-            TextView tvhora = (TextView) row.findViewById(R.id.tvhora);
+           // TextView tvhora = (TextView) row.findViewById(R.id.tvhora);
             TextView tvminima = (TextView) row.findViewById(R.id.tvminima);
             TextView tvmaxima = (TextView) row.findViewById(R.id.tvmaxima);
             ImageView iv=(ImageView)row.findViewById(R.id.imageView);
 
 
             tvfecha.setText(elclima.fecha);
-            tvminima.setText(elclima.minima);
-            tvmaxima.setText(elclima.maxima);
+            tvminima.setText("minima:"+elclima.minima+" °C") ;
+            tvmaxima.setText("maxima: "+elclima.maxima+" °C");
 
             String urlIcono = Constants.URL_ICON+ elclima.icono;
 
