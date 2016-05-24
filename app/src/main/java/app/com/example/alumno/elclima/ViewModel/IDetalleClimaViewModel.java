@@ -8,10 +8,7 @@ import app.com.example.alumno.elclima.Model.Clima;
  */
 public interface IDetalleClimaViewModel {
 
-    void setListener(DetalleClimaActivity detalleClimaActivity);
-
-
-
+    void setListener(IDetalleClimaViewModelListener listener);
     public void setDetail(Clima detalleClima);
 
 

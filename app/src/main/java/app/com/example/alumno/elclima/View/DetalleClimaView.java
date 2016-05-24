@@ -13,16 +13,23 @@ import app.com.example.alumno.elclima.Controller.DetalleClimaActivity;
 import app.com.example.alumno.elclima.Model.Clima;
 import app.com.example.alumno.elclima.R;
 import app.com.example.alumno.elclima.ViewModel.IDetalleClimaViewModel;
+import app.com.example.alumno.elclima.ViewModel.IDetalleClimaViewModelListener;
 
 /**
  * Created by miziloner on 20/05/16.
  */
 public class DetalleClimaView extends Fragment implements IDetalleClimaViewModel {
 
-    IDetalleClimaViewModel viewModelListener;
+    IDetalleClimaViewModelListener mListener;
 
 
     private View rootView;
+    private TextView tvubicacion;
+    private TextView tvempactual;
+    private TextView tvhumedad;
+    private TextView tvpresion;
+    private TextView tvniveldelmar;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,13 +43,22 @@ public class DetalleClimaView extends Fragment implements IDetalleClimaViewModel
 
     }
 
-
     @Override
-    public void setListener(DetalleClimaActivity detalleClimaActivity) {
+    public void setListener(IDetalleClimaViewModelListener listener) {
+
+        mListener = listener;
 
     }
 
     public void setDetail(Clima detalleClima){
+
+        tvubicacion.setText("ubicacion:");
+        tvempactual.setText("Temperatura Actual:");
+        tvhumedad.setText("Humedad:");
+        tvpresion.setText("Presion:");
+        tvniveldelmar.setText("Nivel del mar:");
+
+
 
 
     }
