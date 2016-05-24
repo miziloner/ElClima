@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -51,7 +52,6 @@ public class ClimaView extends Fragment implements IClimaViewModel {
     private ListView listView;
 
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.clima_fragment, container, false);
@@ -86,6 +86,14 @@ public class ClimaView extends Fragment implements IClimaViewModel {
         //TODO falta setear el nuevo adapter al listview
 
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
+            }
+        });
     }
 
     /*public String ponFecha(String fechaFea){
@@ -102,6 +110,8 @@ public class ClimaView extends Fragment implements IClimaViewModel {
 
     }*/
 
+
+
     public class ClimaAdapter extends ArrayAdapter<Clima> {
 
         int layoutResourceId;
@@ -115,12 +125,17 @@ public class ClimaView extends Fragment implements IClimaViewModel {
             this.context = ctx;
             this.layoutResourceId = resource;
 
+
+
         }
+
 
 
     public Clima getItem(int index) {
         return this.losClimas.get(index);
     }
+
+
 
 
     @Override

@@ -22,4 +22,8 @@ public class DetalleClimaActivity extends AppCompatActivity implements IDetalleC
 
     }
 
+    @Override
+    public void setListener(DetalleClimaActivity detalleClimaActivity) {
+
+    }
 }
