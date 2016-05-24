@@ -26,6 +26,11 @@ public class DetalleClimaView extends Fragment implements IDetalleClimaViewModel
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.detalle_fragment, container, false);
+        rootView.findViewById(R.id.tvubicacion);
+        rootView.findViewById(R.id.tvtempactual);
+        rootView.findViewById(R.id.tvhumedad);
+        rootView.findViewById(R.id.tvpresion);
+        rootView.findViewById(R.id.tvniveldelmar);
         return rootView;
 
     }

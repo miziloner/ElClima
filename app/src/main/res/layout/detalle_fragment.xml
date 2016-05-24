@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:text="ubicacion"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/ubicacion"
+        android:id="@+id/tvubicacion"
         android:layout_marginLeft="10dp" />
 
     <TextView
