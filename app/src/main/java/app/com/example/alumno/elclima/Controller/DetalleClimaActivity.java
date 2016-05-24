@@ -5,25 +5,21 @@ import android.support.v7.app.AppCompatActivity;
 
 import app.com.example.alumno.elclima.R;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModel;
+import app.com.example.alumno.elclima.ViewModel.IDetalleClimaViewModel;
 import app.com.example.alumno.elclima.ViewModel.IDetalleClimaViewModelListener;
 
 
 public class DetalleClimaActivity extends AppCompatActivity implements IDetalleClimaViewModelListener{
 
-    private IDetalleClimaViewModelListener viewModelListener;
+    private IDetalleClimaViewModel viewModelListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalle_layout);
-
-        viewModelListener = (IClimaViewModel) getSupportFragmentManager().findFragmentById(R.id.detalle_fragment);
+        viewModelListener = (IDetalleClimaViewModel) getSupportFragmentManager().findFragmentById(R.id.detalle_fragment);
         viewModelListener.setListener(this);
 
     }
 
-    @Override
-    public void setListener(DetalleClimaActivity detalleClimaActivity) {
-
-    }
 }
