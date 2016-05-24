@@ -2,5 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ubicacion"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/ubicacion"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="temperatura_actual"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvtempactual"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="descripcion"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvdescripcion"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="presion"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvpresion"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="humedad"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvhumedad"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="niveldelmar"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvniveldelmar"
+        android:layout_marginLeft="10dp" />
 
 </LinearLayout>

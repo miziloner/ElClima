@@ -51,7 +51,7 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
 
                         ArrayList<Clima> losClimas= new ArrayList<Clima>();
                         // Display the first 500 characters of the response string.
-                        Log.i("COMO NJIOOO PAPAPAAAAAa", "LLegue a weather from service" + response);
+                        Log.i("COMO NOOO PAPAPAAAAA", "LLegue a weather from service" + response);
                         try {
                             JSONObject jsonob = new JSONObject(response);
 

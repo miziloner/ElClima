@@ -68,6 +68,7 @@ public class ClimaView extends Fragment implements IClimaViewModel {
 
     @Override
     public void setListener(IClimaViewModelListener listener) {
+
         mListener = listener;
     }
 
