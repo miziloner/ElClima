@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import app.com.example.alumno.elclima.Controller.DetalleClimaActivity;
 import app.com.example.alumno.elclima.Model.Clima;
@@ -26,11 +27,11 @@ public class DetalleClimaView extends Fragment implements IDetalleClimaViewModel
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.detalle_fragment, container, false);
-        rootView.findViewById(R.id.tvubicacion);
-        rootView.findViewById(R.id.tvtempactual);
-        rootView.findViewById(R.id.tvhumedad);
-        rootView.findViewById(R.id.tvpresion);
-        rootView.findViewById(R.id.tvniveldelmar);
+        TextView tvubicacion = (TextView) rootView.findViewById(R.id.tvubicacion);
+        TextView tvempactual = (TextView) rootView.findViewById(R.id.tvtempactual);
+        TextView tvhumedad = (TextView)rootView.findViewById(R.id.tvhumedad);
+        TextView tvpresion = (TextView)rootView.findViewById(R.id.tvpresion);
+        TextView tvniveldelmar = (TextView)rootView.findViewById(R.id.tvniveldelmar);
         return rootView;
 
     }
