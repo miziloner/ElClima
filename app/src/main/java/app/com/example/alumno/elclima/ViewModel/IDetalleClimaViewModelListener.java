@@ -7,4 +7,6 @@ import app.com.example.alumno.elclima.Controller.DetalleClimaActivity;
  */
 public interface IDetalleClimaViewModelListener {
     void setListener(DetalleClimaActivity detalleClimaActivity);
+
+
 }

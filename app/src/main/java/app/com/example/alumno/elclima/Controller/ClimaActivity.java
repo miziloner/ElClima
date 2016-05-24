@@ -1,5 +1,6 @@
 package app.com.example.alumno.elclima.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import app.com.example.alumno.elclima.Model.Clima;
 import app.com.example.alumno.elclima.Model.Constants;
 import app.com.example.alumno.elclima.R;
+import app.com.example.alumno.elclima.View.DetalleClimaView;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModel;
 import app.com.example.alumno.elclima.ViewModel.IClimaViewModelListener;
 
@@ -35,6 +37,14 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
 
         viewModel = (IClimaViewModel) getSupportFragmentManager().findFragmentById(R.id.clima_fragment);
         viewModel.setListener(this);
+
+    }
+
+    @Override
+    public void launchDetail() {
+
+        Intent i = new Intent(getApplicationContext(), DetalleClimaView.class);
+        startActivity(i);
 
     }
 

@@ -10,7 +10,7 @@ public interface IDetalleClimaViewModel {
 
     void setListener(DetalleClimaActivity detalleClimaActivity);
 
-    void launchDetail();
+
 
     public void setDetail(Clima detalleClima);
 

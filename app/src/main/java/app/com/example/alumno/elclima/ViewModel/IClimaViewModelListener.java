@@ -7,4 +7,6 @@ public interface IClimaViewModelListener {
 
     public void getWeatherFromService();
 
+    void launchDetail();
+
 }
