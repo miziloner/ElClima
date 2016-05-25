@@ -43,7 +43,8 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
     public void launchDetail(Clima clima) {
 
         Intent i = new Intent(getApplicationContext(), DetalleClimaActivity.class);
-        i.putExtra("name",clima.descripcion);
+        i.putExtra("description",clima.descripcion);
+        i.putExtra("name",clima.ubicacion);
         i.putExtra("temp",clima.tempactual);
         i.putExtra("pressure",clima.presion);
         i.putExtra("sea_level",clima.niveldelmar);
@@ -90,11 +91,13 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
 
                                 JSONArray weatherJSONArray = itemJSON.getJSONArray("weather");
                                 JSONObject weatherJSON = (JSONObject) weatherJSONArray.get(0);
+                                String description=weatherJSON.getString("description");
                                 String icon =  weatherJSON.getString("icon");
 
 
 
                                 Clima nuevoClima = new Clima();
+                                nuevoClima.descripcion=description;
                                 nuevoClima.ubicacion = name;
                                 nuevoClima.tempactual= ""+temp;
                                 nuevoClima.presion = ""+presion;

@@ -2,11 +2,9 @@ package app.com.example.alumno.elclima.Controller;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.TextView;
 
 import app.com.example.alumno.elclima.R;
-import app.com.example.alumno.elclima.ViewModel.IClimaViewModel;
 import app.com.example.alumno.elclima.ViewModel.IDetalleClimaViewModel;
 import app.com.example.alumno.elclima.ViewModel.IDetalleClimaViewModelListener;
 
@@ -15,14 +13,16 @@ public class DetalleClimaActivity extends AppCompatActivity implements IDetalleC
 
     private IDetalleClimaViewModel viewModel;
 
-     TextView tvubicacion;
-     TextView tvempactual;
-     TextView tvhumedad;
-     TextView tvpresion;
-     TextView tvniveldelmar;
+     TextView ubicacionTextView;
+     TextView tempactualTextView;
+     TextView humedadTextView;
+     TextView presionTextView;
+     TextView niveldelmarTextView;
+    TextView descripcionTextview;
 
 
     String ubicacion;
+    String descripcion;
     String humedad;
     String presion;
     String niveldelmar;
@@ -40,6 +40,7 @@ public class DetalleClimaActivity extends AppCompatActivity implements IDetalleC
 
 
         ubicacion = getIntent().getStringExtra("name");
+        descripcion = getIntent().getStringExtra("description");
         tempactual = getIntent().getStringExtra("temp");
         presion = getIntent().getStringExtra("pressure");
         humedad = getIntent().getStringExtra("humidity");
@@ -47,18 +48,20 @@ public class DetalleClimaActivity extends AppCompatActivity implements IDetalleC
 
 
 
-        tvubicacion = (TextView) findViewById(R.id.tvubicacion);
-        tvempactual = (TextView) findViewById(R.id.tvtempactual);
-        tvhumedad = (TextView) findViewById(R.id.tvhumedad);
-        tvpresion = (TextView) findViewById(R.id.tvpresion);
-        tvniveldelmar = (TextView)findViewById(R.id.tvniveldelmar);
+        ubicacionTextView = (TextView) findViewById(R.id.tvubicacion);
+        descripcionTextview = (TextView) findViewById(R.id.tvdescripcion);
+        tempactualTextView = (TextView) findViewById(R.id.tvtempactual);
+        humedadTextView = (TextView) findViewById(R.id.tvhumedad);
+        presionTextView = (TextView) findViewById(R.id.tvpresion);
+        niveldelmarTextView = (TextView)findViewById(R.id.tvniveldelmar);
 
 
-        tvubicacion.setText(ubicacion);
-        tvempactual.setText(tempactual);
-        tvhumedad.setText(humedad);
-        tvpresion.setText(presion);
-        tvniveldelmar.setText(niveldelmar);
+        ubicacionTextView.setText(ubicacion);
+        descripcionTextview.setText("Descripcion: "+descripcion);
+        tempactualTextView.setText("Temperatura Actual: "+tempactual);
+        humedadTextView.setText("Humedad: " + humedad);
+        presionTextView.setText("Presion: " + presion);
+        niveldelmarTextView.setText("Nivel del mar: "+ niveldelmar);
 
 
     }
