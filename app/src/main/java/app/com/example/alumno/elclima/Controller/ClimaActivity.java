@@ -34,16 +34,20 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clima_layout);
-
         viewModel = (IClimaViewModel) getSupportFragmentManager().findFragmentById(R.id.clima_fragment);
         viewModel.setListener(this);
 
     }
 
     @Override
-    public void launchDetail() {
+    public void launchDetail(Clima clima) {
 
-        Intent i = new Intent(getApplicationContext(), DetalleClimaView.class);
+        Intent i = new Intent(getApplicationContext(), DetalleClimaActivity.class);
+        i.putExtra("name",clima.descripcion);
+        i.putExtra("temp",clima.tempactual);
+        i.putExtra("pressure",clima.presion);
+        i.putExtra("sea_level",clima.niveldelmar);
+        i.putExtra("humidity",clima.Humedad);
         startActivity(i);
 
     }
@@ -64,8 +68,14 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
                         Log.i("COMO NOOO PAPAPAAAAA", "LLegue a weather from service" + response);
                         try {
                             JSONObject jsonob = new JSONObject(response);
-
+                            JSONObject cityobject =jsonob.getJSONObject("city");
                             JSONArray listArray = jsonob.getJSONArray("list");
+                            JSONObject citycoord = cityobject.getJSONObject("coord");
+
+                            String name = cityobject.getString("name");
+                            double lat = citycoord.getDouble("lat");
+                            double lon = citycoord.getDouble("lon");
+
                             for(int i = 0 ; i < listArray.length() ; i++){
 
                                 JSONObject itemJSON = listArray.getJSONObject(i);
@@ -74,6 +84,9 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
                                 double temp = mainJSON.getDouble("temp");
                                 double tempMin = mainJSON.getDouble("temp_min");
                                 double tempMax = mainJSON.getDouble("temp_max");
+                                double presion = mainJSON.getDouble("pressure");
+                                double nivelmar = mainJSON.getDouble("sea_level");
+                                double humedad = mainJSON.getDouble("humidity");
 
                                 JSONArray weatherJSONArray = itemJSON.getJSONArray("weather");
                                 JSONObject weatherJSON = (JSONObject) weatherJSONArray.get(0);
@@ -82,6 +95,11 @@ public class ClimaActivity extends AppCompatActivity implements IClimaViewModelL
 
 
                                 Clima nuevoClima = new Clima();
+                                nuevoClima.ubicacion = name;
+                                nuevoClima.tempactual= ""+temp;
+                                nuevoClima.presion = ""+presion;
+                                nuevoClima.niveldelmar=""+nivelmar;
+                                nuevoClima.Humedad=""+humedad;
                                 nuevoClima.fecha = fecha;
                                 nuevoClima.maxima = ""+tempMax;
                                 nuevoClima.minima = ""+tempMin;

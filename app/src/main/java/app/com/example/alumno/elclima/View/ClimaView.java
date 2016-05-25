@@ -49,6 +49,8 @@ public class ClimaView extends Fragment implements IClimaViewModel {
 
 
     private View rootView;
+
+
     private ListView listView;
 
 
@@ -73,7 +75,7 @@ public class ClimaView extends Fragment implements IClimaViewModel {
     }
 
     @Override
-    public void pintaClimasEnListView(ArrayList<Clima> losClimasDelWB) {
+    public void pintaClimasEnListView(final ArrayList<Clima> losClimasDelWB) {
         Log.i("", "" + losClimasDelWB.size());
 
         //TODO crear instancia del adapter
@@ -91,6 +93,10 @@ public class ClimaView extends Fragment implements IClimaViewModel {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
+                Clima elSeleccionado = losClimasDelWB.get(position);
+                mListener.launchDetail(elSeleccionado);
+
+                Log.i("aka","aki");
 
             }
         });

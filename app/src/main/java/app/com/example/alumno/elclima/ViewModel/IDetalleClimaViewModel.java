@@ -9,7 +9,7 @@ import app.com.example.alumno.elclima.Model.Clima;
 public interface IDetalleClimaViewModel {
 
     void setListener(IDetalleClimaViewModelListener listener);
-    public void setDetail(Clima detalleClima);
+    void setDetail(Clima detalleClima);
 
 
 

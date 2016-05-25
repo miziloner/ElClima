@@ -34,11 +34,11 @@ public class DetalleClimaView extends Fragment implements IDetalleClimaViewModel
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.detalle_fragment, container, false);
-        TextView tvubicacion = (TextView) rootView.findViewById(R.id.tvubicacion);
-        TextView tvempactual = (TextView) rootView.findViewById(R.id.tvtempactual);
-        TextView tvhumedad = (TextView)rootView.findViewById(R.id.tvhumedad);
-        TextView tvpresion = (TextView)rootView.findViewById(R.id.tvpresion);
-        TextView tvniveldelmar = (TextView)rootView.findViewById(R.id.tvniveldelmar);
+         tvubicacion = (TextView) rootView.findViewById(R.id.tvubicacion);
+         tvempactual = (TextView) rootView.findViewById(R.id.tvtempactual);
+         tvhumedad = (TextView)rootView.findViewById(R.id.tvhumedad);
+         tvpresion = (TextView)rootView.findViewById(R.id.tvpresion);
+         tvniveldelmar = (TextView)rootView.findViewById(R.id.tvniveldelmar);
         return rootView;
 
     }
@@ -47,7 +47,6 @@ public class DetalleClimaView extends Fragment implements IDetalleClimaViewModel
     public void setListener(IDetalleClimaViewModelListener listener) {
 
         mListener = listener;
-
     }
 
     public void setDetail(Clima detalleClima){
@@ -57,9 +56,6 @@ public class DetalleClimaView extends Fragment implements IDetalleClimaViewModel
         tvhumedad.setText("Humedad:");
         tvpresion.setText("Presion:");
         tvniveldelmar.setText("Nivel del mar:");
-
-
-
 
     }
 
